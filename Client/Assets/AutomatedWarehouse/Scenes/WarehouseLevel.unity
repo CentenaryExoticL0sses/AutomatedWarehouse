@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseURL: http://127.0.0.1:5000/api/
-  _layoutEndpoint: v1/layout
+  _layoutEndpoint: /v1/layout
 --- !u!4 &1075362
 Transform:
   m_ObjectHideFlags: 0
