@@ -7,8 +7,10 @@ def create_app():
 
     from .routes.state import state_bp
     from .routes.layout import layout_bp
+    from .routes.health import health_bp
 
     app.register_blueprint(state_bp)
     app.register_blueprint(layout_bp)
+    app.register_blueprint(health_bp)
 
     return app

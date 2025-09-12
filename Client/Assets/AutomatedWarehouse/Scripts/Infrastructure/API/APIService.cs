@@ -4,19 +4,16 @@ using UnityEngine.Networking;
 
 namespace AutomatedWarehouse.Infrastructure.API
 {
-    public class APIService : MonoBehaviour
+    public class APIService
     {
-        [Header("Настройки")]
-        [SerializeField] private string _baseURL;
-        [SerializeField] private string _layoutEndpoint;
+        private readonly string _baseURL;
 
-        private async void Start()
+        public APIService(string baseURL)
         {
-            string response = await GetAsync(_layoutEndpoint);
-            Debug.Log(response);
+            _baseURL = baseURL;
         }
 
-        private async Task<string> GetAsync(string endPoint)
+        public async Task<string> GetAsync(string endPoint)
         {
             string finalURL = _baseURL + endPoint.TrimStart('/');
             UnityWebRequest request = UnityWebRequest.Get(finalURL);
