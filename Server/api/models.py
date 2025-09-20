@@ -7,4 +7,8 @@ class Layout(BaseModel):
     shelves: List[Shelf]
 
 class State(BaseModel):
+    timestamp: str
     robots: List[Robot]
+
+class Health(BaseModel):
+    status : str

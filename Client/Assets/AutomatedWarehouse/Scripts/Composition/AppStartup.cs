@@ -1,24 +1,38 @@
 using UnityEngine;
+using AutomatedWarehouse.Core.Interfaces;
 using AutomatedWarehouse.Infrastructure.API;
+using AutomatedWarehouse.Infrastructure.API.DTO;
+using AutomatedWarehouse.Features.Warehouse;
+using AutomatedWarehouse.Features.Shelves;
 
 namespace AutomatedWarehouse.Composition
 {
     public class AppStartup : MonoBehaviour
     {
-        private APIService _apiService;
+        [SerializeField] private FloorView _floorView;
+        [SerializeField] private ShelvesView _shelvesView;
+
+        private IWarehouseController _warehouseController;
+        private IAPIService _apiService;
+
+        private void Awake()
+        {
+            _warehouseController = new WarehouseController(_floorView, _shelvesView);
+
+            string baseURL = "http://127.0.0.1:5000/";
+            _apiService = new APIService(baseURL);
+        }
 
         private async void Start()
         {
-            string baseURL = "http://127.0.0.1:5000/api/";
-            _apiService = new APIService(baseURL);
+            await _apiService.PingServerAsync();
+            Debug.Log("Подключение к серверу успешно установлено.");
 
-            string connectionTest = await _apiService.GetAsync("/v1/health");
-            Debug.Log(connectionTest);
-
-            string layout = await _apiService.GetAsync("/v1/layout");
+            var layout = await _apiService.GetAsync<LayoutResponse>("/api/v1/layout");
+            _warehouseController.BuildWarehouse(layout);
             Debug.Log(layout);
 
-            string state = await _apiService.GetAsync("/v1/state");
+            var state = await _apiService.GetAsync<StateResponse>("/api/v1/state");
             Debug.Log(state);
         }
     }
