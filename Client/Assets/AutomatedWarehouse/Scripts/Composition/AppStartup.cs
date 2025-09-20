@@ -17,6 +17,9 @@ namespace AutomatedWarehouse.Composition
 
             string layout = await _apiService.GetAsync("/v1/layout");
             Debug.Log(layout);
+
+            string state = await _apiService.GetAsync("/v1/state");
+            Debug.Log(state);
         }
     }
 }
