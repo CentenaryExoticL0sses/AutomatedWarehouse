@@ -1,0 +1,50 @@
+{
+    "size" : { 
+        "width" : 20,
+        "length" : 20
+    },
+    "robots" : [
+        {
+            "id" : "robot:01",
+            "position" : {
+                "x" : 2,
+                "y" : 2
+            },
+            "status" :  "idle",
+            "current_order_id" : null
+        },
+        {
+            "id" : "robot:02",
+            "position" : {
+                "x" : 4,
+                "y" : 4
+            },
+            "status" :  "idle",
+            "current_order_id" : null
+        }
+    ],
+    "shelves" : [
+        {
+            "id" : "shelf:01",
+            "position" : {
+                "x" : 4,
+                "y" : 4
+            },
+            "size" : {
+                "width" : 1,
+                "length" : 1
+            }
+        },
+        {
+            "id" : "shelf:02",
+            "position" : {
+                "x" : 8,
+                "y" : 8
+            },
+            "size" : {
+                "width" : 1,
+                "length" : 1
+            }
+        }
+    ]
+}
