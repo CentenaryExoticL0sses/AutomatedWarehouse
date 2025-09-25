@@ -7,8 +7,8 @@
         {
             "id" : "robot:01",
             "position" : {
-                "x" : 2,
-                "y" : 2
+                "x" : 5,
+                "y" : 9
             },
             "status" :  "idle",
             "current_order_id" : null
@@ -16,8 +16,8 @@
         {
             "id" : "robot:02",
             "position" : {
-                "x" : 4,
-                "y" : 4
+                "x" : 6,
+                "y" : 2
             },
             "status" :  "idle",
             "current_order_id" : null
@@ -27,8 +27,8 @@
         {
             "id" : "shelf:01",
             "position" : {
-                "x" : 4,
-                "y" : 4
+                "x" : 3,
+                "y" : 6
             },
             "size" : {
                 "width" : 1,

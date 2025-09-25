@@ -10,13 +10,13 @@ namespace AutomatedWarehouse.Features.Floor
 
         private GameObject _floorInstance;
 
-        public void GenerateView(SizeModel size)
+        public void DisplayView(SizeModel size)
         {
             _floorInstance = Instantiate(_floorPrefab, transform);
             _floorInstance.transform.localScale = new Vector3(size.Width, 0, size.Length);
         }
 
-        public void DestroyView()
+        public void HideView()
         {
             Destroy(_floorInstance);
         }

@@ -7,23 +7,37 @@ namespace AutomatedWarehouse.Features.Warehouse
     {
         private readonly IFloorView _floorView;
         private readonly IShelvesView _shelvesView;
+        private readonly IRobotsView _robotsView;
 
-        public WarehouseController(IFloorView floorView, IShelvesView shelvesView)
+        public WarehouseController
+        (
+            IFloorView floorView, 
+            IShelvesView shelvesView, 
+            IRobotsView robotsView
+        )
         {
             _floorView = floorView;
             _shelvesView = shelvesView;
+            _robotsView = robotsView;
         }
 
         public void BuildWarehouse(LayoutModel layout)
         {
-            _floorView.GenerateView(layout.Size);
-            _shelvesView.GenerateView(layout.Shelves);
+            _floorView.DisplayView(layout.Size);
+            _shelvesView.DisplayView(layout.Shelves);
+        }
+
+        public void UpdateWarehouse(StateModel stateModel)
+        {
+            _robotsView.HideView();
+            _robotsView.DisplayView(stateModel.Robots);
         }
 
         public void ClearWarehouse()
         {
-            _floorView.DestroyView();
-            _shelvesView.DestroyView();
+            _floorView.HideView();
+            _shelvesView.HideView();
+            _robotsView.HideView();
         }
     }
 }

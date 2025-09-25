@@ -11,7 +11,7 @@ namespace AutomatedWarehouse.Features.Shelves
 
         private List<GameObject> _shelves = new();
 
-        public void GenerateView(IEnumerable<ShelfModel> shelves)
+        public void DisplayView(IEnumerable<ShelfModel> shelves)
         {
             foreach(var shelf in shelves)
             {
@@ -23,7 +23,7 @@ namespace AutomatedWarehouse.Features.Shelves
             }
         }
 
-        public void DestroyView()
+        public void HideView()
         {
             foreach(var shelf in _shelves)
             {

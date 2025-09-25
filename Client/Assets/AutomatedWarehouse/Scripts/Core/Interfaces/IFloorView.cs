@@ -5,8 +5,8 @@ namespace AutomatedWarehouse.Core.Interfaces
 {
     public interface IFloorView
     {
-        public void GenerateView(SizeModel size);
+        public void DisplayView(SizeModel size);
 
-        public void DestroyView();
+        public void HideView();
     }
 }

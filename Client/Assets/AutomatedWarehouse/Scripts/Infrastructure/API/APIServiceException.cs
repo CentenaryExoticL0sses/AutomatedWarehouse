@@ -4,16 +4,16 @@ namespace AutomatedWarehouse.Infrastructure.API
 {
     public class APIServiceException : Exception
     {
-        public long ErrorCode { get; }
+        public long ResponseCode { get; }
 
         public APIServiceException(string message, long errorCode) : base(message)
         {
-            ErrorCode = errorCode;
+            ResponseCode = errorCode;
         }
 
         public APIServiceException(string message, Exception innerException) : base(message, innerException)
         {
-            ErrorCode = -1;
+            ResponseCode = -1;
         }
     }
 }

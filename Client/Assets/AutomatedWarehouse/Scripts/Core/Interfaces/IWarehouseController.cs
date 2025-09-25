@@ -6,6 +6,8 @@ namespace AutomatedWarehouse.Core.Interfaces
     {
         public void BuildWarehouse(LayoutModel layout);
 
+        public void UpdateWarehouse(StateModel state);
+
         public void ClearWarehouse();
     }
 }

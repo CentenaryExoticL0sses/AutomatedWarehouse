@@ -5,8 +5,8 @@ namespace AutomatedWarehouse.Core.Interfaces
 {
     public interface IShelvesView
     {
-        public void GenerateView(IEnumerable<ShelfModel> shelves);
+        public void DisplayView(IEnumerable<ShelfModel> shelves);
 
-        public void DestroyView();
+        public void HideView();
     }
 }
