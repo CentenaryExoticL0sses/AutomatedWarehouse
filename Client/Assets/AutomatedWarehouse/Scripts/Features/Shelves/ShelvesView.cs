@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using AutomatedWarehouse.Core.Interfaces;
-using AutomatedWarehouse.Infrastructure.API.DTO;
+using AutomatedWarehouse.Core.Models;
 
 namespace AutomatedWarehouse.Features.Shelves
 {
@@ -11,14 +11,14 @@ namespace AutomatedWarehouse.Features.Shelves
 
         private List<GameObject> _shelves = new();
 
-        public void GenerateView(IEnumerable<ShelfData> shelves)
+        public void GenerateView(IEnumerable<ShelfModel> shelves)
         {
             foreach(var shelf in shelves)
             {
                 var shelfInstance = Instantiate(_shelfPrefab, transform);
-                shelfInstance.name = shelf.id;
-                shelfInstance.transform.position = new Vector3(shelf.position.x, 0f, shelf.position.y);
-                shelfInstance.transform.localScale = new Vector3(shelf.size.width, 1f, shelf.size.length);
+                shelfInstance.name = shelf.Id;
+                shelfInstance.transform.position = new Vector3(shelf.Position.X, 0f, shelf.Position.Y);
+                shelfInstance.transform.localScale = new Vector3(shelf.Size.Width, 1f, shelf.Size.Length);
                 _shelves.Add(shelfInstance);
             }
         }

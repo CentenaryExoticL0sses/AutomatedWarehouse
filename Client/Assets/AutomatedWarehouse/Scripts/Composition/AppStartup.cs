@@ -4,6 +4,7 @@ using AutomatedWarehouse.Infrastructure.API;
 using AutomatedWarehouse.Infrastructure.API.DTO;
 using AutomatedWarehouse.Features.Warehouse;
 using AutomatedWarehouse.Features.Shelves;
+using AutomatedWarehouse.Features.Floor;
 
 namespace AutomatedWarehouse.Composition
 {
@@ -28,11 +29,12 @@ namespace AutomatedWarehouse.Composition
             await _apiService.PingServerAsync();
             Debug.Log("Подключение к серверу успешно установлено.");
 
-            var layout = await _apiService.GetAsync<LayoutResponse>("/api/v1/layout");
-            _warehouseController.BuildWarehouse(layout);
-            Debug.Log(layout);
+            var layoutData = await _apiService.GetAsync<LayoutData>("/api/v1/layout");
+            var layoutModel = layoutData.ToDomain();
+            _warehouseController.BuildWarehouse(layoutModel);
+            Debug.Log(layoutModel);
 
-            var state = await _apiService.GetAsync<StateResponse>("/api/v1/state");
+            var state = await _apiService.GetAsync<StateData>("/api/v1/state");
             Debug.Log(state);
         }
     }

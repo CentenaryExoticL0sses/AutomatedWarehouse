@@ -1,6 +1,5 @@
-using UnityEngine;
 using AutomatedWarehouse.Core.Interfaces;
-using AutomatedWarehouse.Infrastructure.API.DTO;
+using AutomatedWarehouse.Core.Models;
 
 namespace AutomatedWarehouse.Features.Warehouse
 {
@@ -15,10 +14,10 @@ namespace AutomatedWarehouse.Features.Warehouse
             _shelvesView = shelvesView;
         }
 
-        public void BuildWarehouse(LayoutResponse layout)
+        public void BuildWarehouse(LayoutModel layout)
         {
-            _floorView.GenerateView(layout.grid_size.width, layout.grid_size.length);
-            _shelvesView.GenerateView(layout.shelves);
+            _floorView.GenerateView(layout.Size);
+            _shelvesView.GenerateView(layout.Shelves);
         }
 
         public void ClearWarehouse()

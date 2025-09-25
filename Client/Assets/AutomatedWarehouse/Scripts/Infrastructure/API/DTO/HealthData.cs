@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace AutomatedWarehouse.Infrastructure.API.DTO
 {
-    public class HealthResponse
+    public class HealthData
     {
         public string status;
     }

@@ -1,0 +1,16 @@
+{
+    "name": "AutomatedWarehouse.Features",
+    "rootNamespace": "AutomatedWarehouse.Features",
+    "references": [
+        "GUID:651f724b9c7710f43b4a4b1d141a37c1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

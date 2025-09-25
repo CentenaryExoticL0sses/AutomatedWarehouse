@@ -57,7 +57,7 @@ namespace AutomatedWarehouse.Infrastructure.API
             try
             {
                 string data = request.downloadHandler.text;
-                var healthStatus = JsonUtility.FromJson<HealthResponse>(data);
+                var healthStatus = JsonUtility.FromJson<HealthData>(data);
 
                 if (healthStatus == null || healthStatus.status != "ok")
                 {

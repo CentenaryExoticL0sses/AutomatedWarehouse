@@ -1,7 +1,8 @@
 using UnityEngine;
 using AutomatedWarehouse.Core.Interfaces;
+using AutomatedWarehouse.Core.Models;
 
-namespace AutomatedWarehouse.Features.Warehouse
+namespace AutomatedWarehouse.Features.Floor
 {
     public class FloorView : MonoBehaviour, IFloorView
     {
@@ -9,10 +10,10 @@ namespace AutomatedWarehouse.Features.Warehouse
 
         private GameObject _floorInstance;
 
-        public void GenerateView(int width, int length)
+        public void GenerateView(SizeModel size)
         {
             _floorInstance = Instantiate(_floorPrefab, transform);
-            _floorInstance.transform.localScale = new Vector3(width, 0, length);
+            _floorInstance.transform.localScale = new Vector3(size.Width, 0, size.Length);
         }
 
         public void DestroyView()

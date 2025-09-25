@@ -3,7 +3,7 @@ using System;
 namespace AutomatedWarehouse.Infrastructure.API.DTO
 {
     [Serializable]
-    public class StateResponse
+    public class StateData
     {
         public string timestamp;
         public RobotData[] robots;

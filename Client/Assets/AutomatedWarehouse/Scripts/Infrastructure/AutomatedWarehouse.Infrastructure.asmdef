@@ -1,0 +1,18 @@
+{
+    "name": "AutomatedWarehouse.Infrastructure",
+    "rootNamespace": "AutomatedWarehouse.Infrastructure",
+    "references": [
+        "GUID:09dcc9c0126b6b34ab2a877b8f2277f5",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:651f724b9c7710f43b4a4b1d141a37c1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,18 @@
+{
+    "name": "AutomatedWarehouse.Composition",
+    "rootNamespace": "AutomatedWarehouse.Composition",
+    "references": [
+        "GUID:651f724b9c7710f43b4a4b1d141a37c1",
+        "GUID:fe0b2a9728030724ea1d25f06e496f6e",
+        "GUID:36bbc34110d8d8f4592254a93939b7a1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

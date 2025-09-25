@@ -1,10 +1,10 @@
-using AutomatedWarehouse.Infrastructure.API.DTO;
+using AutomatedWarehouse.Core.Models;
 
 namespace AutomatedWarehouse.Core.Interfaces
 {
     public interface IWarehouseController
     {
-        public void BuildWarehouse(LayoutResponse layout);
+        public void BuildWarehouse(LayoutModel layout);
 
         public void ClearWarehouse();
     }
