@@ -2,25 +2,12 @@ using UnityEngine;
 
 namespace AutomatedWarehouse.Infrastructure.View
 {
-    /// <summary>
-    /// A simple free camera to be added to a Unity game object.
-    /// </summary>
-    /// <remarks>
-    /// Keys:
-    ///	wasd / arrows	- movement
-    ///	q/e 			- up/down (local space)
-    ///	r/f 			- up/down (world space)
-    ///	pageup/pagedown	- up/down (world space)
-    ///	hold shift		- enable fast movement mode
-    ///	right mouse  	- enable free look
-    ///	mouse			- free look / rotation
-    /// </remarks>
     public class CameraController : MonoBehaviour
     {
         /// <summary>
         /// Normal speed of camera movement.
         /// </summary>
-        [SerializeField] private float _movementSpeed = 10f;
+        [SerializeField] private float _movementSpeed = 50f;
 
         /// <summary>
         /// Speed of camera movement when shift is held down,
@@ -30,80 +17,74 @@ namespace AutomatedWarehouse.Infrastructure.View
         /// <summary>
         /// Sensitivity for free look.
         /// </summary>
-        [SerializeField] private float _freeLookSensitivity = 3f;
+        [SerializeField] private float _freeLookSpeed = 200f;
 
         /// <summary>
         /// Amount to zoom the camera when using the mouse wheel.
         /// </summary>
-        [SerializeField] private float _zoomSensitivity = 10f;
+        [SerializeField] private float _zoomSpeed = 100f;
 
         /// <summary>
         /// Amount to zoom the camera when using the mouse wheel (fast mode).
         /// </summary>
-        [SerializeField] private float _fastZoomSensitivity = 50f;
+        [SerializeField] private float _fastZoomSpeed = 150f;
 
-        /// <summary>
-        /// Set to true when free looking (on right mouse button).
-        /// </summary>
+        private Vector3 _movementDirection;
+        private Vector2 _rotationDirection;
+        private float _zoomDirection;
+
+        private bool _fastMode = false;
         private bool _isLooking = false;
 
         private void Update()
         {
-            var fastMode = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-            var movementSpeed = fastMode ? _fastMovementSpeed : this._movementSpeed;
-
+            _fastMode = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+            
+            _movementDirection = Vector3.zero;
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
-                transform.position = transform.position + -transform.right * movementSpeed * Time.deltaTime;
+                _movementDirection += Vector3.left;
             }
 
             if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
-                transform.position = transform.position + transform.right * movementSpeed * Time.deltaTime;
+                _movementDirection += Vector3.right;
             }
 
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
-                transform.position = transform.position + transform.forward * movementSpeed * Time.deltaTime;
+                _movementDirection += Vector3.forward;
             }
 
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
-                transform.position = transform.position + -transform.forward * movementSpeed * Time.deltaTime;
+                _movementDirection += Vector3.back;
             }
 
             if (Input.GetKey(KeyCode.Q))
             {
-                transform.position = transform.position + transform.up * movementSpeed * Time.deltaTime;
+                _movementDirection += Vector3.up;
             }
 
             if (Input.GetKey(KeyCode.E))
             {
-                transform.position = transform.position + -transform.up * movementSpeed * Time.deltaTime;
+                _movementDirection += Vector3.down;
             }
 
-            if (Input.GetKey(KeyCode.R) || Input.GetKey(KeyCode.PageUp))
+            if(_movementDirection.sqrMagnitude > 0.0001f)
             {
-                transform.position = transform.position + Vector3.up * movementSpeed * Time.deltaTime;
+                float movementSpeed = _fastMode ? _fastMovementSpeed : _movementSpeed;
+                Vector3 offset = Time.deltaTime * movementSpeed * _movementDirection.normalized;
+                transform.Translate(offset);
             }
 
-            if (Input.GetKey(KeyCode.F) || Input.GetKey(KeyCode.PageDown))
+            _zoomDirection = Input.GetAxis("Mouse ScrollWheel");
+            if (_zoomDirection != 0)
             {
-                transform.position = transform.position + -Vector3.up * movementSpeed * Time.deltaTime;
-            }
-
-            if (_isLooking)
-            {
-                float newRotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * _freeLookSensitivity;
-                float newRotationY = transform.localEulerAngles.x - Input.GetAxis("Mouse Y") * _freeLookSensitivity;
-                transform.localEulerAngles = new Vector3(newRotationY, newRotationX, 0f);
-            }
-
-            float axis = Input.GetAxis("Mouse ScrollWheel");
-            if (axis != 0)
-            {
-                var zoomSensitivity = fastMode ? _fastZoomSensitivity : this._zoomSensitivity;
-                transform.position = transform.position + transform.forward * axis * zoomSensitivity;
+                float zoomSpeed = _fastMode ? _fastZoomSpeed : _zoomSpeed;
+                Vector3 zoomDirection = _zoomDirection * Vector3.forward;
+                Vector3 zoomOffset = Time.deltaTime * zoomSpeed * zoomDirection.normalized;
+                transform.Translate(zoomOffset);
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -113,6 +94,16 @@ namespace AutomatedWarehouse.Infrastructure.View
             else if (Input.GetKeyUp(KeyCode.Mouse1))
             {
                 StopLooking();
+            }
+
+            _rotationDirection = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+
+            if (_isLooking)
+            {
+                Vector3 eulerAngles = Time.deltaTime * _freeLookSpeed * new Vector3(-_rotationDirection.y, _rotationDirection.x, 0f);
+                Vector3 eulerRotation = transform.localEulerAngles + eulerAngles;
+                Quaternion rotation = Quaternion.Euler(eulerRotation);
+                transform.rotation = rotation;
             }
         }
 
