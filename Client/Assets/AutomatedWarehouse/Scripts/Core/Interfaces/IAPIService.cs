@@ -19,6 +19,13 @@ namespace AutomatedWarehouse.Core.Interfaces
         /// Асинхронно выполняет POST-запрос без ожидания тела ответа.
         /// </summary>
         /// <param name="endPoint">Эндпоинт API.</param>
+        /// <param name="payload">Тело запроса.</param>
+        public Task PostAsync<T>(string endPoint, T payload);
+
+        /// <summary>
+        /// Асинхронно выполняет POST-запрос без ожидания тела ответа.
+        /// </summary>
+        /// <param name="endPoint">Эндпоинт API.</param>
         public Task PostAsync(string endPoint);
 
         /// <summary>

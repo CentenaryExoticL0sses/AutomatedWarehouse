@@ -16,32 +16,6 @@ namespace AutomatedWarehouse.Infrastructure.API
             _baseURL = baseURL.TrimEnd('/');
         }
 
-        public async Task<T> GetAsync<T>(string endPoint)
-        {
-            string finalURL = CombineURL(endPoint);
-            using UnityWebRequest request = UnityWebRequest.Get(finalURL);
-
-            await request.SendWebRequest();
-
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                throw new APIServiceException($"Get failed: {request.error}", request.responseCode);
-            }
-
-            string data = request.downloadHandler.text;
-
-            try
-            {
-                var responseObject = JsonUtility.FromJson<T>(data);
-
-                return responseObject;
-            }
-            catch (Exception ex)
-            {
-                throw new APIServiceException($"Failed to parse JSON response for type {typeof(T).Name}. See inner exception for details.", ex);
-            }
-        }
-
         public async Task PingServerAsync()
         {
             string finalURL = CombineURL("api/v1/health");
@@ -70,9 +44,73 @@ namespace AutomatedWarehouse.Infrastructure.API
             }
         }
 
+        public async Task<T> GetAsync<T>(string endPoint)
+        {
+            string finalURL = CombineURL(endPoint);
+            using UnityWebRequest request = UnityWebRequest.Get(finalURL);
+
+            await request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                throw new APIServiceException($"Get failed: {request.error}", request.responseCode);
+            }
+
+            string data = request.downloadHandler.text;
+
+            try
+            {
+                var responseObject = JsonUtility.FromJson<T>(data);
+
+                return responseObject;
+            }
+            catch (Exception ex)
+            {
+                throw new APIServiceException($"Failed to parse JSON response for type {typeof(T).Name}. See inner exception for details.", ex);
+            }
+        }
+
+        public async Task PostAsync<T>(string endPoint, T payload)
+        {
+            string finalURL = CombineURL(endPoint);
+
+            string jsonData;
+            try
+            {
+               jsonData = JsonUtility.ToJson(payload);
+            }
+            catch(Exception ex)
+            {
+                throw new APIServiceException($"Failed to parse JSON payload for type {typeof(T).Name}. See inner exception for details.", ex);
+            }
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+
+            using UnityWebRequest request = new(finalURL, "POST");
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            await request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                throw new APIServiceException($"Post failed: {request.error}", request.responseCode);
+            }
+        }
+
         public async Task PostAsync(string endPoint)
         {
-            throw new NotImplementedException();
+            string finalURL = CombineURL(endPoint);
+
+            using UnityWebRequest request = new(finalURL, "POST");
+            request.downloadHandler = new DownloadHandlerBuffer();
+
+            await request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                throw new APIServiceException($"Post failed: {request.error}", request.responseCode);
+            }
         }
 
         private string CombineURL(string endpoint)

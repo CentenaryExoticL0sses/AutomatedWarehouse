@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System;
-using System.Threading;
 using System.Threading.Tasks;
 using AutomatedWarehouse.Core.Interfaces;
 using AutomatedWarehouse.Infrastructure.API;
@@ -56,6 +54,8 @@ namespace AutomatedWarehouse.Composition
             while (true)
             {
                 await Task.Delay(pollingInterval);
+
+                await _apiService.PostAsync("/api/v1/simulation/tick");
 
                 var stateData = await _apiService.GetAsync<StateData>("/api/v1/state");
                 var stateModel = stateData.ToDomain();
