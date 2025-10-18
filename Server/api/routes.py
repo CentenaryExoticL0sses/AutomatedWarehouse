@@ -15,8 +15,12 @@ layout_bp = Blueprint('layout_bp', __name__)
 
 @layout_bp.route('/api/v1/layout', methods = ['GET'])
 def get_layout():
-    warehouse = current_app.simulation_engine.warehouse
-    layout = Layout(grid_size=warehouse.size, shelves=warehouse.shelves)
+    simulation = current_app.simulation_engine
+
+    with simulation.lock:
+        warehouse = simulation.warehouse
+        layout = Layout(grid_size=warehouse.size, shelves=warehouse.shelves)
+
     layout_data = layout.model_dump_json(indent=2)
     response = Response(response=layout_data, mimetype='application/json')
     return response
@@ -25,17 +29,13 @@ state_bp = Blueprint('state_bp', __name__)
 
 @state_bp.route('/api/v1/state', methods = ['GET'])
 def get_state():
-    warehouse = current_app.simulation_engine.warehouse
+    simulation = current_app.simulation_engine
     time = datetime.now().isoformat(timespec='milliseconds')
-    state = State(timestamp=time, robots=warehouse.robots)
+
+    with simulation.lock:
+        warehouse = simulation.warehouse
+        state = State(timestamp=time, robots=warehouse.robots)
+
     state_data = state.model_dump_json(indent=2)
     response = Response(response=state_data, mimetype='application/json')
     return response
-
-tick_bp = Blueprint('/api/v1/simulation/tick', __name__)
-
-@tick_bp.route('/api/v1/simulation/tick', methods = ['POST'])
-def tick_simulation():
-    simulation_engine = current_app.simulation_engine
-    simulation_engine.tick()
-    return '', 204
