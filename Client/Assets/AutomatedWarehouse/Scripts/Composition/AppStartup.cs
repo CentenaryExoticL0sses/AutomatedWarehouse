@@ -16,7 +16,7 @@ namespace AutomatedWarehouse.Composition
         [SerializeField] private ShelvesView _shelvesView;
         [SerializeField] private RobotsView _robotsView;
 
-        [SerializeField] private int _pollingIntervalSeconds;
+        [SerializeField] private float _pollingIntervalSeconds;
 
         private IWarehouseController _warehouseController;
         private IAPIService _apiService;
@@ -49,14 +49,11 @@ namespace AutomatedWarehouse.Composition
 
         private async Task PollStateAsync()
         {
-            var pollingInterval = _pollingIntervalSeconds * 1000;
+            int pollingInterval = (int)(_pollingIntervalSeconds * 1000);
 
             while (true)
             {
                 await Task.Delay(pollingInterval);
-
-                await _apiService.PostAsync("/api/v1/simulation/tick");
-
                 var stateData = await _apiService.GetAsync<StateData>("/api/v1/state");
                 var stateModel = stateData.ToDomain();
                 _warehouseController.UpdateWarehouse(stateModel);

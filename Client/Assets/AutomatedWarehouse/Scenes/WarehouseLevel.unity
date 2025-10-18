@@ -503,7 +503,7 @@ MonoBehaviour:
   _floorView: {fileID: 1407249754}
   _shelvesView: {fileID: 728926298}
   _robotsView: {fileID: 1859075714}
-  _pollingIntervalSeconds: 1
+  _pollingIntervalSeconds: 0.5
 --- !u!4 &845425256
 Transform:
   m_ObjectHideFlags: 0
