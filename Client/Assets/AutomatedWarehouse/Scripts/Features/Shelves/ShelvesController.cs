@@ -5,7 +5,7 @@ using AutomatedWarehouse.Core.Models;
 
 namespace AutomatedWarehouse.Features.Shelves
 {
-    public class ShelvesView : MonoBehaviour, IShelvesView
+    public class ShelvesController : MonoBehaviour, IShelvesController
     {
         [SerializeField] private GameObject _shelfPrefab;
 

@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 728926297}
   - component: {fileID: 728926298}
   m_Layer: 0
-  m_Name: ShelvesView
+  m_Name: ShelvesController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -580,7 +580,7 @@ GameObject:
   - component: {fileID: 1407249753}
   - component: {fileID: 1407249754}
   m_Layer: 0
-  m_Name: FloorView
+  m_Name: FloorController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1407249752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcf9e74f9162f0347b93149408396a9d, type: 3}
+  m_Script: {fileID: 11500000, guid: ea95c349d13a23146b01aec40033216d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _floorPrefab: {fileID: 6595742090393398776, guid: 6e107a3b2ab30994c8a25997d95f2323, type: 3}
@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 1859075715}
   - component: {fileID: 1859075714}
   m_Layer: 0
-  m_Name: RobotsView
+  m_Name: RobotsController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

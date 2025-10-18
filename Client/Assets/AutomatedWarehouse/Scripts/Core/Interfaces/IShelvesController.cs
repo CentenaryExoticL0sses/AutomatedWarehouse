@@ -3,7 +3,7 @@ using AutomatedWarehouse.Core.Models;
 
 namespace AutomatedWarehouse.Core.Interfaces
 {
-    public interface IShelvesView
+    public interface IShelvesController
     {
         public void DisplayView(IEnumerable<ShelfModel> shelves);
 

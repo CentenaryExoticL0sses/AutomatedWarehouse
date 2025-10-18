@@ -4,7 +4,7 @@ using AutomatedWarehouse.Core.Models;
 
 namespace AutomatedWarehouse.Features.Floor
 {
-    public class FloorView : MonoBehaviour, IFloorView
+    public class FloorController : MonoBehaviour, IFloorController
     {
         [SerializeField] private GameObject _floorPrefab;
 

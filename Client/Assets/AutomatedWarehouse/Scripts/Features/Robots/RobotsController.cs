@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AutomatedWarehouse.Features.Robots
 {
-    public class RobotsView : MonoBehaviour, IRobotsView
+    public class RobotsController : MonoBehaviour, IRobotsController
     {
         [SerializeField] private GameObject _robotPrefab;
 

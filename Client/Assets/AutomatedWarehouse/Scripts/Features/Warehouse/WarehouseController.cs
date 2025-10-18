@@ -5,15 +5,15 @@ namespace AutomatedWarehouse.Features.Warehouse
 {
     public class WarehouseController : IWarehouseController
     {
-        private readonly IFloorView _floorView;
-        private readonly IShelvesView _shelvesView;
-        private readonly IRobotsView _robotsView;
+        private readonly IFloorController _floorView;
+        private readonly IShelvesController _shelvesView;
+        private readonly IRobotsController _robotsView;
 
         public WarehouseController
         (
-            IFloorView floorView, 
-            IShelvesView shelvesView, 
-            IRobotsView robotsView
+            IFloorController floorView,
+            IShelvesController shelvesView,
+            IRobotsController robotsView
         )
         {
             _floorView = floorView;

@@ -12,9 +12,9 @@ namespace AutomatedWarehouse.Composition
 {
     public class AppStartup : MonoBehaviour
     {
-        [SerializeField] private FloorView _floorView;
-        [SerializeField] private ShelvesView _shelvesView;
-        [SerializeField] private RobotsView _robotsView;
+        [SerializeField] private FloorController _floorView;
+        [SerializeField] private ShelvesController _shelvesView;
+        [SerializeField] private RobotsController _robotsView;
 
         [SerializeField] private float _pollingIntervalSeconds;
 
